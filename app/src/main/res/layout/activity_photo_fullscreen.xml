@@ -17,9 +17,7 @@
             android:layout_height="match_parent"
             android:src="@drawable/ic_launcher_background" />
     </FrameLayout>
-
-    <!-- This FrameLayout insets its children based on system windows using
-         android:fitsSystemWindows. -->
+    
     <FrameLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"

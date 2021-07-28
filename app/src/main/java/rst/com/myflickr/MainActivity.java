@@ -18,10 +18,10 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.List;
 
-import rst.com.myflickr.ui.OnPhotoClickListener;
 import rst.com.myflickr.adapters.PhotoSearchAdapter;
 import rst.com.myflickr.databinding.ActivityMainBinding;
 import rst.com.myflickr.models.PhotoModel;
+import rst.com.myflickr.ui.OnPhotoClickListener;
 import rst.com.myflickr.utils.NetworkConnectionUtil;
 import rst.com.myflickr.viewModels.PhotoSearchViewModel;
 
@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements OnPhotoClickListe
 
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        getSupportActionBar().hide();
         searchByUser();
 
         viewModel = new ViewModelProvider(this).get(PhotoSearchViewModel.class);
@@ -81,12 +80,16 @@ public class MainActivity extends AppCompatActivity implements OnPhotoClickListe
             @Override
             public void onChanged(List<PhotoModel> photoModels) {
                 //observe any data change
-                if (photoModels != null) {
-                    for (PhotoModel photoModel : photoModels) {
-                        Log.v("Updated data", "onChanged : " + photoModel.getTitle());
-                        adapter.setPhotoModelList(photoModels);
+                try {
+                    if (photoModels != null) {
+                        for (PhotoModel photoModel : photoModels) {
+                            Log.v("Updated data", "onChanged : " + photoModel.getTitle());
+                            adapter.setPhotoModelList(photoModels);
 
+                        }
                     }
+                } catch (Exception exception) {
+                    exception.printStackTrace();
                 }
             }
         });
@@ -99,7 +102,7 @@ public class MainActivity extends AppCompatActivity implements OnPhotoClickListe
         binding.gridRecyclerView.setLayoutManager(manager);
         binding.gridRecyclerView.setAdapter(adapter);
 
-        //Pagination : load next page on next page
+        //Extra Mile: Pagination-> load next page
         binding.gridRecyclerView.addOnScrollListener(new RecyclerView.OnScrollListener() {
             @Override
             public void onScrollStateChanged(@NonNull @NotNull RecyclerView recyclerView, int newState) {

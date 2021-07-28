@@ -19,6 +19,7 @@ import rst.com.myflickr.models.PhotoModel;
 
 public class PhotoSearchAdapter extends RecyclerView.Adapter<PhotoSearchAdapter.PhotoViewHolder> {
 
+
     private List<PhotoModel> photoModelList;
     private final OnPhotoClickListener onPhotoClickListener;
 
